@@ -84,11 +84,17 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
         </dependency>
-        <!--mapstruct-映射工具(简化DTO和Entity之间的转换)-->
+        <!--mapstruct-映射工具(简化DTO和Entity之间的转换)·-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>1.5.5.Final</version>
+        </dependency>
+        <!--hutool工具集-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.24</version>
         </dependency>
     </dependencies>
 
