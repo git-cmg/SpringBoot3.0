@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<repositories>
+		<!--阿里云镜像源-->
 		<repository>
 			<id>alimaven</id>
 			<url>https://maven.aliyun.com/repository/public</url>
@@ -33,6 +34,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--自动重启应用程序、热部署依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
