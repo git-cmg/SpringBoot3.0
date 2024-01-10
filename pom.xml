@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>3.2.1</optional>
+            <version>3.2.1</version>
         </dependency>
         <!--自动重启应用程序、热部署依赖-->
         <dependency>
