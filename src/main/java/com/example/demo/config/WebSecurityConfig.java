@@ -1,4 +1,3 @@
-/*spring-security*/
 package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
@@ -7,6 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Spring Security配置
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
