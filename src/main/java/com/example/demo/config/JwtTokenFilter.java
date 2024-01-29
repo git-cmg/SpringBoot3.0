@@ -1,5 +1,8 @@
 package com.example.demo.config;
 
+import com.example.demo.common.ResponseVo;
+import com.example.demo.enums.APIExceptionCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +34,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
+        APIExceptionCode tokenError = APIExceptionCode.TOKEN_ERROR;
 
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -46,8 +50,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, null);
 //            将创建的身份令牌设置到 Spring Security上下文中
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
 
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+        } else {
+//            将数据包装在ResponseVo中转换为json进行返回
+            ObjectMapper objectMapper = new ObjectMapper();
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write(objectMapper.writeValueAsString(new ResponseVo(tokenError.getErrorCode(), tokenError.getErrorMessage())));
+        }
     }
 }

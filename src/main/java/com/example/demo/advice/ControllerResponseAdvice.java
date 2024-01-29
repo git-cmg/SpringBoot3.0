@@ -13,6 +13,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * 统一包装响应
  */
@@ -36,6 +38,7 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
 //                将数据包装在ResponseVo中转换为json进行返回
+                response.getHeaders().setContentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8));
                 return objectMapper.writeValueAsString(new ResponseVo(body));
             } catch (JsonProcessingException e) {
                 throw new APIException(APIExceptionCode.RESPONSE_PACK_ERROR.getErrorCode(), e.getMessage());

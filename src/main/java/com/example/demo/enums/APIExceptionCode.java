@@ -9,8 +9,9 @@ import lombok.Getter;
 @Getter
 public enum APIExceptionCode implements ErrorCode {
     RESPONSE_PACK_ERROR(1201, "response返回包装失败"),
+    TOKEN_ERROR(1202, "token校验未通过"),
     //    登录
-    LOGIN_ERROR(1202, "用户名或密码错误");
+    LOGIN_ERROR(1203, "用户名或密码错误");
 
     /**
      * 错误类型代码

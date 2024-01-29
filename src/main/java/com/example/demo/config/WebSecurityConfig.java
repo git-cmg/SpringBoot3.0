@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,7 +51,7 @@ public class WebSecurityConfig {
 //                配置会话策略为STATELESS，每个请求都是独立的，不依赖于之前的请求
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                添加过滤器，校验token
-                .addFilterAfter(new JwtTokenFilter(new JwtTokenUtil()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new JwtTokenFilter(jwtTokenUtil), UsernamePasswordAuthenticationFilter.class)
 //                配置登录和登出路径
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
 //                        设置登录页面URL，允许所有用户访问登录页面
