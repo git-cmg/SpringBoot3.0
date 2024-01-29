@@ -10,8 +10,6 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -42,15 +40,19 @@ public class UserServiceImpl implements UserService {
 
 //            生成token
             String token = jwtTokenUtil.generateToken(username);
-//            生成 Spring Security身份令牌，用于存储用户信息（用户名、密码、权限列表）
-            Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, null);
-//            将创建的身份令牌设置到 Spring Security上下文中
-            SecurityContextHolder.getContext().setAuthentication(authentication);
 
 //            日志记录登录信息
             log.info("{} login", username);
             return token;
         }
 
+    }
+
+    @Override
+    public String logout(String username) {
+        SecurityContextHolder.clearContext();
+//        日志记录登出信息
+        log.info("{} logout", username);
+        return "成功登出";
     }
 }
