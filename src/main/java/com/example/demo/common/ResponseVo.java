@@ -1,11 +1,13 @@
 package com.example.demo.common;
 
 import com.example.demo.enums.ShowType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
  * 统一返回接口类型
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class ResponseVo {
     /**
@@ -19,7 +21,7 @@ public class ResponseVo {
     /**
      * 错误类型代码
      */
-    private int errorCode;
+    private Integer errorCode;
     /**
      * 显示给用户的错误信息
      */
@@ -27,7 +29,7 @@ public class ResponseVo {
     /**
      * 错误显示类型
      */
-    private int showType;
+    private Integer showType;
     /**
      * 方便后端故障排除：唯一请求ID
      */
