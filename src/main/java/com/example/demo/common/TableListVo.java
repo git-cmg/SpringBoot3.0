@@ -6,11 +6,11 @@ import lombok.Data;
  * 统一返回列表接口类型
  */
 @Data
-public class TableListVo {
+public class TableListVo<T> {
     /**
      * 列表
      */
-    private Object[] list;
+    private T[] list;
     /**
      * 当前页
      */
@@ -32,7 +32,7 @@ public class TableListVo {
      * @param pageSize 每页显示的数据条数
      * @param total    总数量
      */
-    public TableListVo(Object[] list, int current, int pageSize, int total) {
+    public TableListVo(T[] list, int current, int pageSize, int total) {
         this.list = list;
         this.current = current;
         this.pageSize = pageSize;
