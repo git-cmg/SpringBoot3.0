@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,7 +26,7 @@ public class LoginController {
     @ApiResponse(description = "token")
     @PostMapping("/login")
     public String login(
-            @Parameter(name = "loginDto", description = "用户信息", required = true) @RequestBody LoginDto loginDto) {
+            @Validated @RequestBody LoginDto loginDto) {
         return userService.login(loginDto.getUsername(), loginDto.getPassword());
     }
 
