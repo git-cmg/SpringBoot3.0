@@ -34,8 +34,8 @@ public class LoginController {
     @ApiResponse(description = "message")
     @GetMapping("/logout")
     public String logout(
-            @Parameter(name = "Authorization", description = "token", required = true) @RequestHeader("Authorization") String header) {
-        String token = header.replace("Bearer ", "");
+            @Parameter(name = "Authorization", description = "token", required = true) @RequestHeader("Authorization") String authorization) {
+        String token = authorization.replace("Bearer ", "");
         String username = jwtTokenUtil.getUsernameFromToken(token);
         return userService.logout(username);
     }
